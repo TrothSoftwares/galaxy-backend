@@ -1,3 +1,3 @@
 class Employee < ApplicationRecord
-  has_many :tools
+  has_many :enquiries
 end
