@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606062949) do
+ActiveRecord::Schema.define(version: 20160607060522) do
+
+  create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "contact"
+    t.string   "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "employees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -45,6 +54,27 @@ ActiveRecord::Schema.define(version: 20160606062949) do
     t.datetime "updated_at",   null: false
     t.string   "remarks"
     t.index ["enquiry_id"], name: "index_followups_on_enquiry_id", using: :btree
+  end
+
+  create_table "installments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date     "date"
+    t.integer  "amount"
+    t.integer  "sale_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sale_id"], name: "index_installments_on_sale_id", using: :btree
+  end
+
+  create_table "sales", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "totalprice"
+    t.string   "status"
+    t.integer  "installpricepermonth"
+    t.integer  "months"
+    t.string   "equation"
+    t.integer  "customer_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["customer_id"], name: "index_sales_on_customer_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
